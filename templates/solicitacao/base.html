@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sistema de Serviços Terceirizados | Home</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/blog-home.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'solicitacao:home' %}">Sistema de Serviços Terceirizados</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'solicitacao:home' %}"><i class="fas fa-home"></i> Home</a>
+            </li>
+            {% if request.user.is_authenticated %}
+            <li>
+              <a href="" class="nav-link"><i class="fas fa-user-alt"></i> {{ request.user.username }}</a>
+            </li>
+            <li>
+              <a href="{% url 'core:logout' %}" class="nav-link"><i class="fas fa-sign-out-alt"></i> Sair</a>
+            </li>
+            {% else %}
+            <li>
+              <a href="{% url 'core:login' %}" class="nav-link"><i class="fas fa-sign-in-alt"></i> Login</a>
+            </li>
+            <li>
+              <a href="{% url 'core:cadastro' %}" class="nav-link"><i class="fas fa-user-alt"></i> Cadastro</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+        <!-- Page Content -->
+        <div class="container">
+
+          <div class="row">
+
+    {% block content %}
+
+    {% endblock %}
+
+    <!-- Sidebar Widgets Column -->
+    <div class="col-md-4">
+
+      {% if request.user.is_staff %}
+      <div class="card my-4">
+        <h5 class="card-header">Solicitações Por Categoria</h5>
+        <div class="card-body">
+          <ul>
+            <li><a href="{% url 'solicitacao:adm-motorista' %}">Motorista</a></li>
+            <li><a href="{% url 'solicitacao:adm-pedreiro' %}">Pedreiro</a></li>
+            <li><a href="{% url 'solicitacao:adm-professor' %}">Professor</a></li>
+            <li><a href="{% url 'solicitacao:adm-cozinheiro' %}">Cozinheiro</a></li>
+          </ul>
+        </div>
+      </div>
+      {% else %}
+      <!-- Side Widget -->
+      <div class="card my-4">
+        <h5 class="card-header">Minhas Solicitações</h5>
+        <div class="card-body">
+          <ul>
+            <li><a href="{% url 'solicitacao:user-motorista' %}">Motorista</a></li>
+            <li><a href="{% url 'solicitacao:user-pedreiro' %}">Pedreiro</a></li>
+            <li><a href="{% url 'solicitacao:user-professor' %}">Professor</a></li>
+            <li><a href="{% url 'solicitacao:user-cozinheiro' %}">Cozinheiro</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Side Widget -->
+      <div class="card my-4">
+        <h5 class="card-header">Nova Solicitação</h5>
+        <div class="card-body">
+          <ul>
+            <li><a href="{% url 'solicitacao:add-motorista' %}">Motorista</a></li>
+            <li><a href="{% url 'solicitacao:add-pedreiro' %}">Pedreiro</a></li>
+            <li><a href="{% url 'solicitacao:add-professor' %}">Professor</a></li>
+            <li><a href="{% url 'solicitacao:add-cozinheiro' %}">Cozinheiro</a></li>
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+
+  </div>
+  <!-- /.row -->
+
+</div>
+<!-- /.container -->
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Sistema de Serviços Terceirizados 2019</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+</html>

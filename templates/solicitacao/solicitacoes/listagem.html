@@ -1,0 +1,24 @@
+{% extends '../base.html' %}
+{% block content %}
+
+    <div class="col-md-8">
+
+        {% for object in object_list %}
+
+          <!-- Blog Post -->
+          <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="card-title">{{ object }}</h2>
+              <a href="{% url 'solicitacao:visualizar' object.pk %}" class="btn btn-primary">Visualizar &rarr;</a>
+            </div>
+            <div class="card-footer text-muted">
+              {{ object.solicitacao|date }} por
+              {{ object.user.first_name }}
+            </div>
+          </div>
+
+        {% endfor %}
+
+    </div>
+
+{% endblock %}
